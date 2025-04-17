@@ -1,0 +1,60 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    user-select: none;
+}
+
+#headerFirst,
+#deliveryBox,
+#accountBox {
+    border: 1px solid rgb(222 226 230);
+}
+
+#accountBox p {
+    font-size: 20px;
+}
+
+#deliveryBox:hover,
+#accountBox:hover,
+#backButton:hover {
+    background-color: rgb(245, 245, 245);
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+
+    #headerFirst,
+    #deliveryBox,
+    #accountBox {
+        border: none;
+    }
+
+    #deliveryBox h5 {
+        font-size: 28px;
+    }
+
+    #deliveryBox p {
+        font-size: 20px;
+    }
+
+    #backButton i,
+    #accountBox p {
+        font-size: 30px;
+    }
+}
+
+@media (max-width: 480px) {
+
+    #deliveryBox h5 {
+        font-size: 17px;
+    }
+
+    #deliveryBox p {
+        font-size: 12px;
+    }
+
+    #backButton i,
+    #accountBox p {
+        font-size: 22px;
+    }
+}
