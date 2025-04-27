@@ -2,10 +2,10 @@ import "@/styles/header.css";
 import BackButton from "./sub-component/backButton";
 import DeliveryBox from "./sub-component/deliveryBox";
 import HeaderLogo from "./sub-component/headerLogo";
-import SearchLg from "./sub-component/searchLg";
+import SearchBoxLg from "./sub-component/searchBoxLg";
 import AccountBox from "./sub-component/accountBox";
 import CartBox from "./sub-component/cartBox";
-import SearchSm from "./sub-component/searchSm";
+import SearchBoxSm from "./sub-component/searchBoxSm";
 
 export default function Header() {
     return (
@@ -14,12 +14,12 @@ export default function Header() {
                 <HeaderLogo />
                 <BackButton />
                 <DeliveryBox />
-                <SearchLg />
+                <SearchBoxLg />
                 <AccountBox />
                 <CartBox />
             </div>
             <div id="headerSecond" className="d-lg-none d-flex p-1">
-                <SearchSm />
+                <SearchBoxSm />
             </div>
         </header>
     )

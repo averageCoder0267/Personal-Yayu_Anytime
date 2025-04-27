@@ -16,12 +16,11 @@ export const sendMail = async (req, res) => {
             subject: "Verification Email",
             html: `<!DOCTYPE html>
                     <html>
-
+                            
                     <head>
                         <meta charset="UTF-8" />
                         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
                         <title>Verify Your Email - Yayu Anytime</title>
-                        <link href="https://fonts.googleapis.com/css2?family=Lexend&display=swap" rel="stylesheet">
                         <style>
                             body {
                                 font-family: 'Lexend', sans-serif;
@@ -29,53 +28,43 @@ export const sendMail = async (req, res) => {
                                 margin: 0;
                                 padding: 0;
                             }
-
+                            
                             .email-container {
                                 background-color: #ffffff;
-                                max-width: 600px;
                                 margin: 40px auto;
                                 border-radius: 8px;
                                 overflow: hidden;
                                 box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
                                 user-select: none;
                             }
-
+                            
                             .email-header {
                                 background-color: #ffc107;
                                 color: white;
                                 padding: 20px;
                                 text-align: center;
                             }
-
+                            
                             .email-body {
                                 padding: 10px 30px;
                             }
-
+                            
                             .email-body h2 {
                                 margin-top: 0;
                                 color: #333333;
                                 font-size: 24px;
                             }
-
-                            .email-body p{
+                            
+                            .email-body p {
                                 font-size: 20px;
                             }
-
-                            .code-box {
-                                color: black;
-                                font-size: 24px;
-                                font-weight: bold;
-                                padding: 2px auto;
-                                border-radius: 6px;
-                                letter-spacing: 4px;
-                                display: flex;
-                                justify-content: center;
-                                align-items: center;
+                            #randomCode{
+                                font-weight: 900;
                             }
                         </style>
-
+                            
                     </head>
-
+                            
                     <body>
                         <div class="email-container">
                             <div class="email-header">
@@ -89,17 +78,12 @@ export const sendMail = async (req, res) => {
                             <div class="email-body">
                                 <h2>Thank you for signing up!</h2>
                                 <p>
-                                    To complete your registration, please use the verification code below:
+                                    To complete your registration, please use the verification code : <span id="randomCode">${randomCode}</span>
                                 </p>
-                                <h1 class="code-box">
-                                    <span>
-                                        ${randomCode}
-                                    </span>
-                                </h1>
                             </div>
                         </div>
                     </body>
-
+                            
                     </html>`
         };
         const info = await transporter.sendMail(mailOptions);

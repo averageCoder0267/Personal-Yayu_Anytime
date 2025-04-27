@@ -5,7 +5,7 @@ import Link from "next/link"
 export default function ProductBanner() {
 
     return (
-        <div className="px-md-4 px-sm-1 px-1 py-1">
+        <div className="px-lg-4 px-1 py-1">
             <Link href="/">
                 <img role="button" src={Banner.PaanCorner.src} alt="Check your internet connection" width="100%" />
             </Link>

@@ -17,7 +17,7 @@ export const addUser = async (req, res) => {
             const toBeAdded = new User({ email });
             await toBeAdded.save();
             const newUser = await User.findOne({ email });
-            res.send(200).send({ msg: "Adding User", userId: newUser._id })
+            res.status(200).send({ msg: "Adding User", userId: newUser._id });
         } else {
             res.status(200).send({ msg: "Get User", userId: user._id });
         }

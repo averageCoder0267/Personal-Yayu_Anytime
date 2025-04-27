@@ -3,7 +3,8 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import "@mantine/core/styles.css";
 import { MantineProvider } from "@mantine/core";
 import Header from "@/components/Header/header";
-import UserProvider from "@/contexts/UserContext";
+import AuthProvider from "@/contexts/AuthContext";
+import AddressProvider from "@/contexts/AddressContext";
 
 export const metadata = {
   title: "Yayu Anytime",
@@ -14,12 +15,14 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <UserProvider>
-          <MantineProvider>
-            <Header />
-            {children}
-          </MantineProvider>
-        </UserProvider>
+        <AuthProvider>
+          <AddressProvider>
+            <MantineProvider>
+              <Header />
+              {children}
+            </MantineProvider>
+          </AddressProvider>
+        </AuthProvider>
       </body>
     </html>
   );

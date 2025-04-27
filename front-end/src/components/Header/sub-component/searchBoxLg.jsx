@@ -1,14 +1,14 @@
 "use client"
-import { Input } from "@mantine/core"
+import { Input } from "@mantine/core";
 import { useState } from "react";
 
-export default function SearchLg() {
+export default function SearchBoxLg() {
 
-    const [value, setValue] = useState('');
+    const [value, setValue] = useState("");
 
     return (
-        <div id="searchBox" className="border col-lg-4 d-lg-flex d-none justify-content-center align-items-center">
-            {/* <input className="border-1 rounded-2 col-lg-10 fs-5 px-3 py-2" type="text" placeholder="Search Products" /> */}
+        <div id="searchBox"
+         className="border col-lg-4 d-lg-flex d-none justify-content-center align-items-center">
             <Input
                 placeholder="Search Products"
                 value={value}
@@ -16,7 +16,7 @@ export default function SearchLg() {
                 rightSection={value !== '' ? <Input.ClearButton onClick={() => setValue('')} /> : undefined}
                 rightSectionPointerEvents="auto"
                 size="md"
-                radius={"lg"}
+                radius="lg"
                 className="col-10"
             />
         </div>
