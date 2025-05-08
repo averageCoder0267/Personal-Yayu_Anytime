@@ -1,4 +1,5 @@
 import { AddressContext } from "@/contexts/AddressContext";
+import { lexend } from "@/fonts";
 import DeleteUserAddress from "@/hooks/DeleteUserAddress";
 import { Menu } from "@mantine/core";
 import { useContext } from "react";

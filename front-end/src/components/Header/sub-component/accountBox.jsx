@@ -1,62 +1,40 @@
 "use client"
 import { AuthContext } from "@/contexts/AuthContext"
 import { useContext, useState } from "react"
-import LoginModal from "../modal/loginModal";
-import AccountModal from "../modal/accountModal";
 import { useRouter } from "next/navigation";
+import { lexend, roboto } from "@/fonts";
+import { useDisclosure } from "@mantine/hooks";
+import AccountModal from "../modal/accountModal";
 
 export default function AccountBox() {
 
     const { auth } = useContext(AuthContext);
     const router = useRouter();
-    const [loginModal, setLoginModal] = useState(false);
-    const [accountModal, setAccountModal] = useState(false);
 
-    function mountLoginModal() {
-        if (!auth.isLoggedin)
-            setLoginModal(true);
-    }
-    function unMountLoginModal() {
-        setLoginModal(false);
-    }
-
-    function mountAccountModal() {
-        if (auth.isLoggedin)
-            setAccountModal(true);
-    }
-    function unMountAccountModal() {
-        setAccountModal(false);
-    }
-
-    function triggerAccountPage() {
-        if (auth.isLoggedin)
-            router.push("/Account");
-    }
+    const [opened, { open, close }] = useDisclosure(false);
 
     return (
         <>
-            <div className={`col-lg-1 col-sm-2 col-2 d-lg-flex d-none justify-content-center align-items-center`}
-                id="accountBox" onClick={() => {
-                    mountLoginModal();
-                    mountAccountModal();
-                }}>
-                <p className="fw-light m-0">
+            <div className={`${lexend.className} col-lg-1 col-sm-2 col-2 d-lg-flex d-none justify-content-center align-items-center`}
+                id="accountBox" onClick={open}>
+                <p className={`${roboto.className} fw-light m-0`}>
                     {(auth.isLoggedin) ? "Account" : "Login"}
                 </p>
             </div >
 
             <div className={`col-lg-1 col-sm-2 col-2 d-lg-none d-flex justify-content-center align-items-center`}
                 id="accountBox" onClick={() => {
-                    mountLoginModal();
-                    triggerAccountPage();
+                    if (auth.isLoggedin)
+                        router.push("/Account");
+                    else
+                        open();
                 }}>
-                <p className="fw-light m-0">
+                <p className={`${roboto.className} fw-light m-0`}>
                     {(auth.isLoggedin) ? <i className="bi bi-person-circle"></i> : "Login"}
                 </p>
             </div>
 
-            {(loginModal && <LoginModal back={unMountLoginModal} />)}
-            {(accountModal && <AccountModal back={unMountAccountModal} />)}
+            <AccountModal opened={opened} close={close} />
 
         </>
     )

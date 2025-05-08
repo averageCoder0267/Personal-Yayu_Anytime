@@ -53,8 +53,10 @@
         font-size: 12px;
     }
 
-    #backButton i,
-    #accountBox p {
+    #backButton i{
         font-size: 22px;
+    }
+    #accountBox p {
+        font-size: 16px;
     }
 }

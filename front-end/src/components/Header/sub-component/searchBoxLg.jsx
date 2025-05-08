@@ -1,4 +1,5 @@
 "use client"
+import { roboto } from "@/fonts";
 import { Input } from "@mantine/core";
 import { useState } from "react";
 
@@ -8,7 +9,7 @@ export default function SearchBoxLg() {
 
     return (
         <div id="searchBox"
-         className="border col-lg-4 d-lg-flex d-none justify-content-center align-items-center">
+            className="border col-lg-4 d-lg-flex d-none justify-content-center align-items-center">
             <Input
                 placeholder="Search Products"
                 value={value}
@@ -17,7 +18,7 @@ export default function SearchBoxLg() {
                 rightSectionPointerEvents="auto"
                 size="md"
                 radius="lg"
-                className="col-10"
+                className={`${roboto.className} col-10`}
             />
         </div>
     )

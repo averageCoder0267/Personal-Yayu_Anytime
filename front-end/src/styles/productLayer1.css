@@ -1,0 +1,12 @@
+#productList {
+    gap: 0 24px;
+}
+
+@media (max-width: 768px) {
+    #productList {
+        gap: 10px 14px;
+    }
+    .text-center{
+        font-size: 10px;
+    }
+}

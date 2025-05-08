@@ -1,10 +1,15 @@
-
 "use client"
+import { AddressContext } from "@/contexts/AddressContext";
+import { AuthContext } from "@/contexts/AuthContext";
+import { lexend } from "@/fonts";
 import { useRouter } from "next/navigation";
+import { useContext } from "react";
 
 export default function DefaultAccount({ content }) {
 
     const router = useRouter();
+    const { authDispatch } = useContext(AuthContext);
+    const {addressDispatch} = useContext(AddressContext);
 
     function MouseEnterStyling(ele) {
         ele.classList.add("bg-light")
@@ -16,10 +21,27 @@ export default function DefaultAccount({ content }) {
         ele.children[0].classList.replace("text-dark", "text-dark-emphasis")
     }
 
+    function Logout() {
+        const auth = {
+            email: "",
+            userId: "",
+            isLoggedin: false
+        };
+        authDispatch({
+            type: "USER_AUTH",
+            payload: auth
+        });
+        addressDispatch({
+            type: "USER_ADDRESS",
+            payload: []
+        });
+        router.push("/");
+    };
+
     return (
         <>
 
-            <div className="d-lg-flex d-none justify-content-center align-items-center py-5">
+            <div className={`${lexend.className} d-lg-flex d-none justify-content-center align-items-center py-5`}>
                 <div className="border row col-10">
                     <div className="border col-4 p-0">
                         <div className="border col-12 text-center p-4">
@@ -45,7 +67,7 @@ export default function DefaultAccount({ content }) {
                         <div role="button" onMouseEnter={(e) => { MouseEnterStyling(e.currentTarget) }}
                             onMouseLeave={(e) => { MouseLeaveStyling(e.currentTarget) }}
                             onClick={() => {
-                                router.push("/");
+                                router.push("/Account/Gift");
                             }}
                             className="border col-12 px-5 py-4">
                             <h5 className="text-dark-emphasis fw-normal m-0"><i className="bi bi-gift"></i> E-Gift Cards</h5>
@@ -53,7 +75,7 @@ export default function DefaultAccount({ content }) {
                         <div role="button" onMouseEnter={(e) => { MouseEnterStyling(e.currentTarget) }}
                             onMouseLeave={(e) => { MouseLeaveStyling(e.currentTarget) }}
                             onClick={() => {
-                                router.push("/");
+                                router.push("/Account/Privacy");
                             }}
                             className="border col-12 px-5 py-4">
                             <h5 className="text-dark-emphasis fw-normal m-0"><i className="bi bi-shield-lock"></i> Account Privacy</h5>
@@ -61,7 +83,7 @@ export default function DefaultAccount({ content }) {
                         <div role="button" onMouseEnter={(e) => { MouseEnterStyling(e.currentTarget) }}
                             onMouseLeave={(e) => { MouseLeaveStyling(e.currentTarget) }}
                             className="border col-12 px-5 py-4">
-                            <h5 className="text-dark-emphasis fw-normal m-0">Logout</h5>
+                            <h5 className="text-dark-emphasis fw-normal m-0" onClick={Logout}>Logout</h5>
                         </div>
                     </div>
                     <div className="border col-8">

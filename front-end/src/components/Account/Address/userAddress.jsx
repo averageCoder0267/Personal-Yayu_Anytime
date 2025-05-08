@@ -4,6 +4,7 @@ import AddressDrawer from "./drawer/addressDrawer";
 import { useContext, useEffect, useState } from "react";
 import { AddressContext } from "@/contexts/AddressContext";
 import AddressList from "./addressList";
+import { lexend } from "@/fonts";
 
 export default function UserAddress() {
 
@@ -11,8 +12,8 @@ export default function UserAddress() {
     const [opened, { open, close }] = useDisclosure(false);
 
     return (
-        <div className="col-12 p-4">
-            <h4>My Addresses</h4>
+        <div className={`${lexend.className} col-12 p-4`}>
+            <h4 className="fw-semibold">My Addresses</h4>
             <button className="btn btn-sm btn-outline-success fw-semibold" onClick={() => { open(); setCurrent(-1); }}>
                 <i className="bi bi-plus-lg" /> Add new address
             </button>

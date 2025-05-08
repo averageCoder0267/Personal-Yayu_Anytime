@@ -21,7 +21,7 @@ export default function SaveAsInput({ current, saveAsFn }) {
     }, []);
 
     return (
-        <div className="d-flex align-items-center">
+        <div className="d-flex flex-lg-row flex-column align-items-start justify-content-start">
             <SegmentedControl
                 withItemsBorders={false}
                 color="#198754"
@@ -49,7 +49,7 @@ export default function SaveAsInput({ current, saveAsFn }) {
                 placeholder="Save address as"
                 mt="xs"
                 size='md'
-                className="m-0"
+                className="m-lg-0 mt-2"
                 defaultValue={
                     (current == -1) ? "" :
                         ((address[current].saveAs == "Home") ||

@@ -7,6 +7,7 @@ import { AddressContext } from '@/contexts/AddressContext';
 import AddUserAddress from '@/hooks/AddUserAddress';
 import { AuthContext } from '@/contexts/AuthContext';
 import UpdateUserAddress from '@/hooks/UpdateuserAddress';
+import { lexend } from '@/fonts';
 
 export default function AddressDrawer({ opened, close, current }) {
 
@@ -73,8 +74,8 @@ export default function AddressDrawer({ opened, close, current }) {
 
     return (
         <>
-            <Drawer position='bottom'
-                radius="md" opened={opened} size="42rem" onClose={close} title="Enter your address">
+            <Drawer position='bottom' className={lexend.className}
+                radius="md" opened={opened} size="43rem" onClose={close} title="Enter your address">
                 <form onSubmit={(e) => { e.preventDefault(); }}>
                     <p className='text-secondary fw-semibold m-0'>Save address as</p>
                     <SaveAsInput saveAsFn={setMyAddress} current={current} />
