@@ -1,6 +1,6 @@
 import Address from "../model/Address.js";
 
-async function getUserAddress(req, res) {
+export const getUserAddress = async (req, res) => {
     try {
         const { userId } = req.query;
         const address = await Address.find({ userId });
@@ -10,7 +10,7 @@ async function getUserAddress(req, res) {
     }
 }
 
-async function addUserAddress(req, res) {
+export const addUserAddress = async (req, res) => {
     try {
         const { userId } = req.body;
         const toBeAdded = new Address({ ...req.body });
@@ -22,7 +22,7 @@ async function addUserAddress(req, res) {
     }
 }
 
-async function updateUserAddress(req, res) {
+export const updateUserAddress = async (req, res) => {
     try {
         const { addressId } = req.query;
         await Address.findByIdAndUpdate(addressId, req.body);
@@ -32,7 +32,7 @@ async function updateUserAddress(req, res) {
     }
 }
 
-async function deleteUserAddress(req, res) {
+export const deleteUserAddress = async (req, res) => {
     try {
         const { addressId } = req.query;
         await Address.findByIdAndDelete(addressId);
@@ -41,5 +41,3 @@ async function deleteUserAddress(req, res) {
         console.log(error);
     }
 }
-
-export { getUserAddress, addUserAddress, updateUserAddress, deleteUserAddress };

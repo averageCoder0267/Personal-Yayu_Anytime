@@ -5,6 +5,7 @@ import connectDb from "./config/database.js";
 import userRoutes from "./router/userRoutes.js";
 import authRoutes from "./router/authRoutes.js";
 import addressRoutes from "./router/addressRoutes.js";
+import productRoutes from "./router/productRoutes.js";
 
 const server = express();
 
@@ -24,6 +25,7 @@ server.get("/", (req, res) => {
 server.use("/auth", authRoutes);
 server.use("/user", userRoutes);
 server.use("/address", addressRoutes);
+server.use("/product", productRoutes);
 server.listen(port, () => {
     console.log("Server Running..");
 })
