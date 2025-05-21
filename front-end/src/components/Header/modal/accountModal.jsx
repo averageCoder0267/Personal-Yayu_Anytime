@@ -24,6 +24,31 @@ export default function AccountModal({ opened, close }) {
     const [email, setEmail] = useState("");
     const [code, setCode] = useState("");
 
+    function resetLogin() {
+        codeRef.current.style.display = "none";
+        loginRef.current.disabled = "false";
+        loginRef.current.textContent = "Continue";
+        setEmail("");
+        setCode("");
+        setCodeInput("none");
+    }
+
+    function Logout() {
+        const auth = {
+            email: "",
+            userId: "",
+            isLoggedin: false
+        };
+        authDispatch({
+            type: "USER_AUTH",
+            payload: auth
+        });
+        addressDispatch({
+            type: "USER_ADDRESS",
+            payload: []
+        });
+    };
+
     async function submitHandler() {
         if (loginRef.current.textContent == "Continue") {
             if (emailRef.current.value == "" || !emailRef.current.value.includes("@gmail.com"))
@@ -56,6 +81,7 @@ export default function AccountModal({ opened, close }) {
                     payload: address
                 });
                 close();
+                resetLogin();
             } else
                 codeRef.current.value = "";
         }
@@ -67,7 +93,6 @@ export default function AccountModal({ opened, close }) {
                 (auth.isLoggedin)
                     ?
                     <Modal className={lexend.className} radius={"lg"} opened={opened} title="My Account" onClose={() => {
-                        setEmail("");
                         close();
                     }} size="xl">
                         <div className="bg-light rounded-5 p-3">
@@ -101,7 +126,10 @@ export default function AccountModal({ opened, close }) {
                                     </Link>
                                 </h6>
                                 <h6 className="fw-normal fs-5 m-0 pt-3">
-                                    <Link href="/" onClick={close}
+                                    <Link href="/" onClick={() => {
+                                        close();
+                                        Logout();
+                                    }}
                                         className="text-dark text-decoration-none">
                                         <i className="bi bi-shield-lock pe-2" /> Logout
                                     </Link>
@@ -111,8 +139,8 @@ export default function AccountModal({ opened, close }) {
                     </Modal>
                     :
                     <Modal className={lexend.className} radius={"lg"} opened={opened} onClose={() => {
-                        setEmail("");
                         close();
+                        resetLogin();
                     }} size="xl">
                         <div className="bg-light rounded-5 d-flex flex-column align-items-center px-3 py-3">
                             <div role="button" className="bg-warning col-lg-5 col-sm-6 col-8 rounded d-flex justify-content-center align-items-center p-3">

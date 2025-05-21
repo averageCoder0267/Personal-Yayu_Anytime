@@ -1,25 +1,88 @@
 "use client"
 
+import { CartContext } from '@/contexts/CartContext';
 import { useCounter } from '@mantine/hooks';
+import { useContext, useEffect } from 'react';
 
-export default function ProductCounter() {
+export default function ProductCounter({ max_limit, product }) {
 
-    const [count, handlers] = useCounter(0, { min: 0, max: 10 });
+    const { cart, cartDispatch } = useContext(CartContext);
+    const [count, handlers] = useCounter(0, { min: 0, max: max_limit });
+
+    function Add() {
+        const element = {
+            name: product.name,
+            image: product.image,
+            unit: product.unit,
+            price: product.price,
+            quantity: 1,
+            max_quantity: product.quantity
+        }
+        const cartProduct = cart.products;
+        cartProduct.push(element);
+        cartDispatch({
+            type: "CART_PRODUCTS",
+            payload: cartProduct
+        })
+    }
+
+    function Increment() {
+        const cartProduct = cart.products.map((element) => {
+            if (product.name == element.name) {
+                element.quantity += 1;
+            }
+            return element;
+        })
+        cartDispatch({
+            type: "CART_PRODUCTS",
+            payload: cartProduct
+        });
+    }
+
+    function Decrement() {
+        const cartProduct = cart.products.filter((element) => {
+            if (product.name == element.name) {
+                if (element.quantity > 1) {
+                    element.quantity -= 1;
+                    return element;
+                }
+            } else
+                return element;
+        })
+        cartDispatch({
+            type: "CART_PRODUCTS",
+            payload: cartProduct
+        });
+    }
 
     return (
         <>
-            <button className="btn btn-success col-md-6">
+            <button className="btn btn-success col-md-6 d-flex justify-content-around">
                 {
                     (count == 0)
                         ?
-                        <span className='col-12 px-3' onClick={handlers.increment}>
+                        <span className='col-12 px-3'
+                            onClick={() => {
+                                handlers.increment();
+                                Add();
+                            }}>
                             Add
                         </span>
                         :
                         <>
-                            <span className='me-2 px-2' onClick={handlers.decrement}>-</span>
+                            <span className='px-2'
+                                onClick={() => {
+                                    handlers.decrement();
+                                    Decrement();
+                                }}
+                            >-</span>
                             <span>{count}</span>
-                            <span className='ms-2 px-2' onClick={handlers.increment}>+</span>
+                            <span className='px-2'
+                                onClick={() => {
+                                    handlers.increment();
+                                    Increment();
+                                }}
+                            >+</span>
                         </>
                 }
             </button>

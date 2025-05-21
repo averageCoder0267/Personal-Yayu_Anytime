@@ -5,6 +5,7 @@ import { MantineProvider } from "@mantine/core";
 import Header from "@/components/Header/header";
 import AuthProvider from "@/contexts/AuthContext";
 import AddressProvider from "@/contexts/AddressContext";
+import CartProvider from "@/contexts/CartContext";
 
 export const metadata = {
   title: "Yayu Anytime",
@@ -17,10 +18,12 @@ export default function RootLayout({ children }) {
       <body>
         <AuthProvider>
           <AddressProvider>
-            <MantineProvider>
-              <Header />
-              {children}
-            </MantineProvider>
+            <CartProvider>
+              <MantineProvider>
+                <Header />
+                {children}
+              </MantineProvider>
+            </CartProvider>
           </AddressProvider>
         </AuthProvider>
       </body>
