@@ -9,6 +9,16 @@ export default function ProductCounter({ max_limit, product }) {
     const { cart, cartDispatch } = useContext(CartContext);
     const [count, handlers] = useCounter(0, { min: 0, max: max_limit });
 
+    useEffect(() => {
+        if (cart.products.length == 0)
+            handlers.set(0);
+        else
+            cart.products.forEach((element) => {
+                if (product.name == element.name)
+                    handlers.set(element.quantity);
+            })
+    }, [cart])
+
     function Add() {
         handlers.increment();
         const element = {
