@@ -1,15 +1,45 @@
-import { useCounter } from "@mantine/hooks"
 
-export default function CartCounter({ current, max_limit }) {
+import { CartContext } from "@/contexts/CartContext";
+import { useContext } from "react";
 
-    const [count, handler] = useCounter(current, { min: 0, max: max_limit });
+export default function CartCounter({ current, max_limit, product }) {
+
+    const { cart, cartDispatch } = useContext(CartContext);
 
     function Increment() {
-        handler.increment();
+        if (current == max_limit)
+            return;
+        const cartProducts = cart.products.map((element) => {
+            if (product.name == element.name) {
+                return { ...element, quantity: element.quantity + 1 };
+            }
+            return element;
+        });
+        cartDispatch({
+            type: "CART_PRODUCTS",
+            payload: cartProducts
+        })
     }
 
     function Decrement() {
-        handler.decrement();
+        let cartProducts = [];
+        if (product.quantity == 1) {
+            cartProducts = cart.products.filter((element) => {
+                if (product.name != element.name)
+                    return element;
+            })
+        } else {
+            cartProducts = cart.products.map((element) => {
+                if (product.name == element.name) {
+                    return { ...element, quantity: element.quantity - 1 };
+                }
+                return element;
+            });
+        }
+        cartDispatch({
+            type: "CART_PRODUCTS",
+            payload: cartProducts
+        });
     }
 
     return (
@@ -17,7 +47,7 @@ export default function CartCounter({ current, max_limit }) {
             <span className='px-2'
                 onClick={Decrement}
             >-</span>
-            <span>{count}</span>
+            <span>{current}</span>
             <span className='px-2'
                 onClick={Increment}
             >+</span>

@@ -10,9 +10,9 @@ export default async function ProductGrid() {
     return (
         <div className="row col-12 mx-auto">
             {
-                products.map((ele, i) => {
+                products.map((element, index) => {
                     return (
-                        <ProductCatalog key={i} product={ele} />
+                        <ProductCatalog key={index} product={element} />
                     )
                 })
             }

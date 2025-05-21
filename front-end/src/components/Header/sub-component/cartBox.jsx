@@ -1,7 +1,7 @@
 "use client"
 import { CartContext } from "@/contexts/CartContext";
 import { lexend } from "@/fonts";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import CartDrawer from "../drawer/cartDrawer";
 import { useDisclosure } from "@mantine/hooks";
 
@@ -10,6 +10,11 @@ export default function CartBox() {
     const { cart } = useContext(CartContext);
 
     const [opened, handler] = useDisclosure(false);
+
+    useEffect(() => {
+        if (cart.products.length == 0)
+            handler.close();
+    }, [cart.products.length])
 
     return (
         <div id="cartBox"

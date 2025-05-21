@@ -3,7 +3,7 @@
 import { Drawer } from "@mantine/core";
 import { lexend } from "@/fonts";
 import { DeliveryClock } from "@/assets/MyCartImages";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { CartContext } from "@/contexts/CartContext";
 import CartCounter from "@/components/Cart/CartCounter";
 
@@ -25,7 +25,7 @@ export default function CartDrawer({ opened, handler }) {
                     <p className="fw-semibold m-0" style={{ fontSize: "13px" }}>₹ {element.price}</p>
                 </div>
                 <div className="col-3 d-flex align-items-center">
-                    <CartCounter current={element.quantity} max_limit={element.max_quantity} />
+                    <CartCounter current={element.quantity} max_limit={element.max_quantity} product={element} />
                 </div>
             </div>
         );

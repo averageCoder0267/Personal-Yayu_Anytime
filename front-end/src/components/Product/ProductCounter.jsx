@@ -10,6 +10,7 @@ export default function ProductCounter({ max_limit, product }) {
     const [count, handlers] = useCounter(0, { min: 0, max: max_limit });
 
     function Add() {
+        handlers.increment();
         const element = {
             name: product.name,
             image: product.image,
@@ -27,6 +28,9 @@ export default function ProductCounter({ max_limit, product }) {
     }
 
     function Increment() {
+        if (count == max_limit)
+            return;
+        handlers.increment();
         const cartProduct = cart.products.map((element) => {
             if (product.name == element.name) {
                 element.quantity += 1;
@@ -40,6 +44,7 @@ export default function ProductCounter({ max_limit, product }) {
     }
 
     function Decrement() {
+        handlers.decrement();
         const cartProduct = cart.products.filter((element) => {
             if (product.name == element.name) {
                 if (element.quantity > 1) {
@@ -62,26 +67,17 @@ export default function ProductCounter({ max_limit, product }) {
                     (count == 0)
                         ?
                         <span className='col-12 px-3'
-                            onClick={() => {
-                                handlers.increment();
-                                Add();
-                            }}>
+                            onClick={Add}>
                             Add
                         </span>
                         :
                         <>
                             <span className='px-2'
-                                onClick={() => {
-                                    handlers.decrement();
-                                    Decrement();
-                                }}
+                                onClick={Decrement}
                             >-</span>
                             <span>{count}</span>
                             <span className='px-2'
-                                onClick={() => {
-                                    handlers.increment();
-                                    Increment();
-                                }}
+                                onClick={Increment}
                             >+</span>
                         </>
                 }
