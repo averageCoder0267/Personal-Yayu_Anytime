@@ -45,8 +45,10 @@ export default function CartDrawer({ opened, handler }) {
                         </p>
                     </div>
                 </div>
-
                 {renderProducts}
+            </div>
+
+            <div className="shadow border p-2 rounded-3 mt-4">
 
             </div>
 

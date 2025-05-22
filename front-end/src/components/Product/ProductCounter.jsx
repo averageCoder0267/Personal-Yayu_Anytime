@@ -2,7 +2,7 @@
 
 import { CartContext } from '@/contexts/CartContext';
 import { useCounter } from '@mantine/hooks';
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 export default function ProductCounter({ max_limit, product }) {
 
@@ -13,10 +13,13 @@ export default function ProductCounter({ max_limit, product }) {
         if (cart.products.length == 0)
             handlers.set(0);
         else
-            cart.products.forEach((element) => {
-                if (product.name == element.name)
+            for (let element of cart.products) {
+                if (product.name == element.name) {
                     handlers.set(element.quantity);
-            })
+                    return;
+                }
+            }
+        handlers.set(0);
     }, [cart])
 
     function Add() {
