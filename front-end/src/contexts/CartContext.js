@@ -6,8 +6,8 @@ export const CartContext = createContext()
 
 let initialState = {
     products: [],
-    deliveryCharges: 20,
-    handlingCharges: 10,
+    delivery_charge: 25,
+    handling_charge: 10,
     tips: null
 }
 
@@ -15,7 +15,7 @@ function cartReducer(state, action) {
     switch (action.type) {
         case "CART_PRODUCTS":
             return { ...state, products: action.payload };
-        case "Cart_Tip":
+        case "CART_TIP":
             return { ...state, tips: action.payload };
         default:
             return state;

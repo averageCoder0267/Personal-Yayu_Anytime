@@ -49,7 +49,7 @@ export default function SaveAsInput({ current, saveAsFn }) {
                 placeholder="Save address as"
                 mt="xs"
                 size='md'
-                className="m-lg-0 mt-2"
+                className="mt-lg-auto mt-2"
                 defaultValue={
                     (current == -1) ? "" :
                         ((address[current].saveAs == "Home") ||

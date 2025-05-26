@@ -18,7 +18,7 @@ export default function UserAddress() {
                 <i className="bi bi-plus-lg" /> Add new address
             </button>
             <AddressList currentFn={setCurrent} openDrawer={open} />
-            <AddressDrawer  opened={opened} close={close} current={current} />
+            <AddressDrawer opened={opened} close={close} current={current} />
         </div>
     );
 }
