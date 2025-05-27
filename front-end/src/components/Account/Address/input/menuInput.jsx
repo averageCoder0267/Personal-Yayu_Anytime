@@ -7,18 +7,19 @@ import { useContext } from "react";
 export default function MenuInput({ current, currentFn, openDrawer, deleteAddressFn }) {
 
     const { address, addressDispatch } = useContext(AddressContext);
+    const { locations, selected } = address;
 
     function deleteHandler() {
-        const addressId = address[current]._id;
+        const addressId = locations[current]._id;
         deleteAddressFn(addressId);
-        const newAddress = address.filter((ele, i) => {
+        const newAddress = locations.filter((ele, i) => {
             if (i != current)
                 return ele;
         })
         currentFn(-1);
         addressDispatch({
-            type: "USER_ADDRESS",
-            payload: newAddress
+            type: "USER_ADDRESS_AND_SELECTION",
+            payload: { locations: newAddress, selected: newAddress.length - 1 }
         });
     }
 

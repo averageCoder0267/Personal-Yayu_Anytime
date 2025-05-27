@@ -8,6 +8,7 @@ import AddressSelectorButton from "../button/addressSelectedButton";
 export default function HeaderAddressList({ back, current, currentFn }) {
 
     const { address } = useContext(AddressContext);
+    const { locations } = address;
 
     return (
         <div className="">
@@ -16,8 +17,8 @@ export default function HeaderAddressList({ back, current, currentFn }) {
                 <i className="bi bi-plus-lg" /> Add new address
             </Link>
             {
-                (address.length == 0) ? ""
-                    : address?.map((ele, i) => {
+                (locations.length == 0) ? ""
+                    : locations?.map((ele, i) => {
                         return (
                             <div className="d-flex my-2" key={i}>
                                 <div className="col-1 me-sm-4 me-1">

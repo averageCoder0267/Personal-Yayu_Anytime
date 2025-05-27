@@ -1,8 +1,7 @@
 "use client"
 import { useDisclosure } from "@mantine/hooks";
 import AddressDrawer from "./drawer/addressDrawer";
-import { useContext, useEffect, useState } from "react";
-import { AddressContext } from "@/contexts/AddressContext";
+import { useState } from "react";
 import AddressList from "./addressList";
 import { lexend } from "@/fonts";
 

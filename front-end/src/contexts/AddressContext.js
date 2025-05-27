@@ -4,12 +4,19 @@ import { createContext, useEffect, useReducer } from "react"
 
 export const AddressContext = createContext();
 
-let initialState = [];
+let initialState = {
+    locations: [],
+    selected: 0
+};
 
 function addressReducer(state, action) {
     switch (action.type) {
         case "USER_ADDRESS":
-            return [...action.payload];
+            return { ...state, locations: [...action?.payload] };
+        case "USER_ADDRESS_AND_SELECTION":
+            return { locations: [...action?.payload?.locations], selected: action?.payload?.selected }
+        case "USER_ADDRESS_SELECTOR":
+            return { ...state, selected: action?.payload }
         default:
             return state;
     }

@@ -6,14 +6,14 @@ import { useContext, useEffect, useRef } from "react";
 export default function SaveAsInput({ current, saveAsFn }) {
 
     const { address } = useContext(AddressContext);
-
+    const { locations } = address;
     const textRef = useRef();
     useEffect(() => {
         if (current == -1) {
             textRef.current.style.display = "none";
         } else {
-            if ((address[current].saveAs == "Home") ||
-                (address[current].saveAs == "Work") || (address[current].saveAs == "Hotel"))
+            if ((locations[current].saveAs == "Home") ||
+                (locations[current].saveAs == "Work") || (locations[current].saveAs == "Hotel"))
                 textRef.current.style.display = "none";
             else
                 textRef.current.style.display = "block";
@@ -30,9 +30,9 @@ export default function SaveAsInput({ current, saveAsFn }) {
                 className="me-3"
                 defaultValue={
                     (current == -1) ? "Home" :
-                        ((address[current].saveAs == "Home") ||
-                            (address[current].saveAs == "Work") ||
-                            (address[current].saveAs == "Hotel")) ? address[current].saveAs : "Other"
+                        ((locations[current].saveAs == "Home") ||
+                            (locations[current].saveAs == "Work") ||
+                            (locations[current].saveAs == "Hotel")) ? locations[current].saveAs : "Other"
                 }
                 onClick={(event) => {
                     saveAsFn((prev) => {
@@ -52,9 +52,9 @@ export default function SaveAsInput({ current, saveAsFn }) {
                 className="mt-lg-auto mt-2"
                 defaultValue={
                     (current == -1) ? "" :
-                        ((address[current].saveAs == "Home") ||
-                            (address[current].saveAs == "Work") ||
-                            (address[current].saveAs == "Hotel")) ? "" : address[current].saveAs
+                        ((locations[current].saveAs == "Home") ||
+                            (locations[current].saveAs == "Work") ||
+                            (locations[current].saveAs == "Hotel")) ? "" : locations[current].saveAs
                 }
                 onBlur={(event) => {
                     saveAsFn((prev) => {

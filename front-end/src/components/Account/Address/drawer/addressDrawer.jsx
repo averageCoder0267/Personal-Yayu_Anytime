@@ -13,6 +13,7 @@ export default function AddressDrawer({ opened, close, current }) {
 
     const { auth } = useContext(AuthContext);
     const { address, addressDispatch } = useContext(AddressContext);
+    const { locations, selected } = address;
 
     const [myAddress, setMyAddress] = useState({
         saveAs: "",
@@ -35,12 +36,12 @@ export default function AddressDrawer({ opened, close, current }) {
             };
             const newAddress = await AddUserAddress(form);
             addressDispatch({
-                type: "USER_ADDRESS",
-                payload: newAddress
+                type: "USER_ADDRESS_AND_SELECTION",
+                payload: { locations: newAddress, selected: selected + 1 }
             });
             close();
         } else {
-            const addressId = address[current]._id;
+            const addressId = locations[current]._id;
             let isChanged = false;
             for (let key in myAddress) {
                 if (myAddress[key] != "") {
@@ -50,16 +51,16 @@ export default function AddressDrawer({ opened, close, current }) {
             };
             if (isChanged) {
                 const form = {
-                    saveAs: (myAddress.saveAs == "") ? address[current].saveAs : myAddress.saveAs,
-                    houseNo: (myAddress.houseNo == "") ? address[current].houseNo : myAddress.houseNo,
-                    floor: (myAddress.floor == "") ? address[current].floor : myAddress.floor,
-                    area: (myAddress.area == "") ? address[current].area : myAddress.area,
-                    landmark: (myAddress.landmark == "") ? address[current].landmark : myAddress.landmark,
-                    name: (myAddress.name == "") ? address[current].name : myAddress.name,
-                    phoneNo: (myAddress.phoneNo == "") ? address[current].phoneNo : myAddress.phoneNo
+                    saveAs: (myAddress.saveAs == "") ? locations[current].saveAs : myAddress.saveAs,
+                    houseNo: (myAddress.houseNo == "") ? locations[current].houseNo : myAddress.houseNo,
+                    floor: (myAddress.floor == "") ? locations[current].floor : myAddress.floor,
+                    area: (myAddress.area == "") ? locations[current].area : myAddress.area,
+                    landmark: (myAddress.landmark == "") ? locations[current].landmark : myAddress.landmark,
+                    name: (myAddress.name == "") ? locations[current].name : myAddress.name,
+                    phoneNo: (myAddress.phoneNo == "") ? locations[current].phoneNo : myAddress.phoneNo
                 };
                 UpdateUserAddress(addressId, form);
-                const newAddress = [...address];
+                const newAddress = [...locations];
                 newAddress[current] = { ...form, userId: auth.userId, _id: addressId };
                 addressDispatch({
                     type: "USER_ADDRESS",
@@ -85,7 +86,7 @@ export default function AddressDrawer({ opened, close, current }) {
                         mt="xs"
                         size='lg'
                         defaultValue={
-                            (current == -1) ? "" : address[current].houseNo
+                            (current == -1) ? "" : locations[current].houseNo
                         }
                         onBlur={(event) => {
                             setMyAddress((prev) => {
@@ -98,7 +99,7 @@ export default function AddressDrawer({ opened, close, current }) {
                         mt="xs"
                         size='lg'
                         defaultValue={
-                            (current == -1) ? "" : address[current].floor
+                            (current == -1) ? "" : locations[current].floor
                         }
                         onBlur={(event) => {
                             setMyAddress((prev) => {
@@ -112,7 +113,7 @@ export default function AddressDrawer({ opened, close, current }) {
                         mt="xs"
                         size='lg'
                         defaultValue={
-                            (current == -1) ? "" : address[current].area
+                            (current == -1) ? "" : locations[current].area
                         }
                         onBlur={(event) => {
                             setMyAddress((prev) => {
@@ -125,7 +126,7 @@ export default function AddressDrawer({ opened, close, current }) {
                         mt="xs"
                         size='lg'
                         defaultValue={
-                            (current == -1) ? "" : address[current].landmark
+                            (current == -1) ? "" : locations[current].landmark
                         }
                         onBlur={(event) => {
                             setMyAddress((prev) => {
@@ -140,7 +141,7 @@ export default function AddressDrawer({ opened, close, current }) {
                         mt="xs"
                         size='lg'
                         defaultValue={
-                            (current == -1) ? "" : address[current].name
+                            (current == -1) ? "" : locations[current].name
                         }
                         onBlur={(event) => {
                             setMyAddress((prev) => {
@@ -156,7 +157,7 @@ export default function AddressDrawer({ opened, close, current }) {
                         component={IMaskInput}
                         mask="+91 00000 00000"
                         defaultValue={
-                            (current == -1) ? "+91" : address[current].phoneNo
+                            (current == -1) ? "+91" : locations[current].phoneNo
                         }
                         onBlur={(event) => {
                             setMyAddress((prev) => {

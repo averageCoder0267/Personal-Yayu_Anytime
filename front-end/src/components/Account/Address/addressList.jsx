@@ -10,12 +10,13 @@ import DeleteUserAddress from "@/hooks/DeleteUserAddress";
 export default function AddressList({ currentFn, openDrawer }) {
 
     const { address } = useContext(AddressContext);
+    const { locations } = address;
 
     return (
         <div className="mt-4">
             {
-                (address.length == 0) ? ""
-                    : address?.map((ele, i) => {
+                (locations?.length == 0) ? ""
+                    : locations?.map((ele, i) => {
                         return (
                             <div className="d-flex mt-2" key={i}>
                                 <div className="col-1 me-4">

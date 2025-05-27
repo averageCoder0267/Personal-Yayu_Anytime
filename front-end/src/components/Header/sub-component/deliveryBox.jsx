@@ -8,12 +8,21 @@ import { lexend, roboto } from "@/fonts";
 
 export default function DeliveryBox() {
 
-    const { address } = useContext(AddressContext);
+    const { address, addressDispatch } = useContext(AddressContext);
+
+    const { locations, selected } = address;
 
     const pathname = usePathname();
 
-    const [currentAddress, setCurrentAddress] = useState(0);
+    const currentAddress = selected;
     const [opened, { open, close }] = useDisclosure(false);
+
+    function setSelected(index) {
+        addressDispatch({
+            type: "USER_ADDRESS_SELECTOR",
+            payload: index
+        })
+    }
 
     return (
         <>
@@ -22,14 +31,14 @@ export default function DeliveryBox() {
                 <h5 className={`${lexend.className} fw-semibold m-0`}>Delivery in 10 minutes</h5>
                 <p className={`${roboto.className} text-truncate m-0`}>
                     {
-                        (address.length == 0) ? "Add Location"
-                            : `${address[currentAddress].houseNo},
-                             ${address[currentAddress].floor},
-                             ${address[currentAddress].area}`
+                        (locations?.length == 0) ? "Add Location"
+                            : `${locations[currentAddress].houseNo},
+                             ${locations[currentAddress].floor},
+                             ${locations[currentAddress].area}`
                     }
                 </p>
             </div>
-            <AddressModal opened={opened} close={close} current={currentAddress} currentFn={setCurrentAddress} />
+            <AddressModal opened={opened} close={close} current={currentAddress} currentFn={setSelected} />
         </>
     )
 }

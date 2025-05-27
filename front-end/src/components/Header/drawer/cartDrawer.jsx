@@ -12,12 +12,20 @@ import AddressModal from "../modal/addressModal";
 
 export default function CartDrawer({ opened, handler }) {
 
-    const { address } = useContext(AddressContext);
+    const { address, addressDispatch } = useContext(AddressContext);
+    const { locations, selected } = address;
     const { cart, cartDispatch } = useContext(CartContext);
     const [tooltipOpened, setTooltipOpened] = useState(false);
     const [tip, setTip] = useState(10);
-    const [currentAddress, setCurrentAddress] = useState(0);
+    const currentAddress = selected;
     const [addressModalOpened, { open, close }] = useDisclosure(false);
+
+    function setSelected(index) {
+        addressDispatch({
+            type: "USER_ADDRESS_SELECTOR",
+            payload: index
+        })
+    }
 
     const tip20 = useRef();
     const tip30 = useRef();
@@ -284,15 +292,15 @@ export default function CartDrawer({ opened, handler }) {
                     <div className="col-9 px-2">
                         <h5 className="fw-semibold m-0 text-truncate">Delivery to
                             {
-                                (address.length == 0)
-                                    ? " Where" : ` ${address[currentAddress].saveAs}`
+                                (locations.length == 0)
+                                    ? " Where" : ` ${locations[currentAddress].saveAs}`
                             }
                         </h5>
                         <p className="text-dark-emphasis m-0 text-truncate">
                             {
-                                (address.length == 0)
+                                (locations.length == 0)
                                     ? "Add Address"
-                                    : `${address[currentAddress].houseNo}, ${address[currentAddress].floor}, ${address[currentAddress].area}, Near ${address[currentAddress].landmark}`
+                                    : `${locations[currentAddress].houseNo}, ${locations[currentAddress].floor}, ${locations[currentAddress].area}, Near ${locations[currentAddress].landmark}`
                             }
                         </p>
                     </div>
@@ -311,7 +319,7 @@ export default function CartDrawer({ opened, handler }) {
                     </div>
                 </div>
             </div>
-            <AddressModal opened={addressModalOpened} close={close} current={currentAddress} currentFn={setCurrentAddress} />
+            <AddressModal opened={addressModalOpened} close={close} current={currentAddress} currentFn={setSelected} />
 
         </Drawer >
     )
