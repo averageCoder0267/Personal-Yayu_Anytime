@@ -35,10 +35,16 @@ export default function AddressDrawer({ opened, close, current }) {
                 name: myAddress.name, phoneNo: myAddress.phoneNo
             };
             const newAddress = await AddUserAddress(form);
-            addressDispatch({
-                type: "USER_ADDRESS_AND_SELECTION",
-                payload: { locations: newAddress, selected: selected + 1 }
-            });
+            if (locations.length == 0)
+                addressDispatch({
+                    type: "USER_ADDRESS",
+                    payload: newAddress
+                });
+            else
+                addressDispatch({
+                    type: "USER_ADDRESS_AND_SELECTION",
+                    payload: { locations: newAddress, selected: selected + 1 }
+                });
             close();
         } else {
             const addressId = locations[current]._id;

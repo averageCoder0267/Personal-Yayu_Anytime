@@ -3,7 +3,7 @@
 import { Drawer, NumberInput, Tooltip } from "@mantine/core";
 import { lexend } from "@/fonts";
 import { DeliveryClock } from "@/assets/MyCartImages";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { CartContext } from "@/contexts/CartContext";
 import CartCounter from "@/components/Cart/CartCounter";
 import { AddressContext } from "@/contexts/AddressContext";
@@ -33,10 +33,6 @@ export default function CartDrawer({ opened, handler }) {
     const tipCustom = useRef();
     const tipInput = useRef();
     const tipAddButton = useRef();
-
-    useEffect(() => {
-        console.log(address);
-    })
 
     function tipButton(action) {
         if (action == 20) {

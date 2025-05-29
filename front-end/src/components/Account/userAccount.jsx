@@ -9,8 +9,8 @@ import { useContext } from "react";
 export default function UserAccount() {
 
     const router = useRouter();
-    const {authDispatch} = useContext(AuthContext);
-    const {addressDispatch} = useContext(AddressContext);
+    const { authDispatch } = useContext(AuthContext);
+    const { addressDispatch } = useContext(AddressContext);
 
     function Logout() {
         const auth = {
@@ -26,6 +26,7 @@ export default function UserAccount() {
             type: "USER_ADDRESS",
             payload: []
         });
+        window.localStorage.clear()
         router.push("/");
     };
 

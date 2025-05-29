@@ -47,6 +47,8 @@ export default function AccountModal({ opened, close }) {
             type: "USER_ADDRESS",
             payload: []
         });
+        window.localStorage.clear();
+        close();
     };
 
     async function submitHandler() {

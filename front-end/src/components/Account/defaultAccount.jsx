@@ -9,7 +9,7 @@ export default function DefaultAccount({ content }) {
 
     const router = useRouter();
     const { authDispatch } = useContext(AuthContext);
-    const {addressDispatch} = useContext(AddressContext);
+    const { addressDispatch } = useContext(AddressContext);
 
     function MouseEnterStyling(ele) {
         ele.classList.add("bg-light")
@@ -35,6 +35,7 @@ export default function DefaultAccount({ content }) {
             type: "USER_ADDRESS",
             payload: []
         });
+        window.localStorage.clear();
         router.push("/");
     };
 
