@@ -137,7 +137,7 @@ export default function CartDrawer({ opened, handler }) {
                 : items_total + handling_charge
 
     return (
-        <Drawer className={lexend.className} opened={opened} position="right" size="40vw" onClose={handler.close} title="My Cart">
+        <Drawer className={lexend.className} opened={opened} position="right" size="lg" onClose={handler.close} title="My Cart">
 
             <div className="shadow border p-2 rounded-3">
                 <div className="d-flex align-items-center">
@@ -275,12 +275,12 @@ export default function CartDrawer({ opened, handler }) {
                 </div>
             </div>
 
-            <div className="shadow border p-2 rounded-3 mt-4 px-2">
+            <div className="shadow border rounded-3 my-4 px-2 py-3">
                 <h4 className="fw-semibold m-0">Cancellation Policy</h4>
                 <p className="fw-lighter lh-sm m-0 mt-2">Orders cannot be cancelled once packed for delivery. In case of unexpected delays, a refund will be provided, if applicable.</p>
             </div>
 
-            <div className="border p-2 rounded-3 mt-5 px-2">
+            <div className="border p-2 rounded-3 mt-4 px-2">
                 <div className="d-flex align-items-center">
                     <div className="col-1 d-flex justify-content-center align-items-center">
                         <i className="bi bi-geo-alt fs-5" />

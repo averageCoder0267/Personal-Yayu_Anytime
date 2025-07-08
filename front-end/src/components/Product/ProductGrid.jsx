@@ -1,7 +1,6 @@
 
 import GetProductsByCategory from "@/hooks/GetProductsByCategory";
 import ProductCatalog from "./ProductCatalog";
-import CartBar from "../Cart/CartBar";
 
 export default async function ProductGrid() {
 
@@ -16,7 +15,6 @@ export default async function ProductGrid() {
                     )
                 })
             }
-            <CartBar />
         </div>
     );
 }

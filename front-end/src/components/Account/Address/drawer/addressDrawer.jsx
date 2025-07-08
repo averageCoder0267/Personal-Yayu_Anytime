@@ -43,7 +43,7 @@ export default function AddressDrawer({ opened, close, current }) {
             else
                 addressDispatch({
                     type: "USER_ADDRESS_AND_SELECTION",
-                    payload: { locations: newAddress, selected: selected + 1 }
+                    payload: { locations: newAddress, selected: newAddress.length - 1 }
                 });
             close();
         } else {

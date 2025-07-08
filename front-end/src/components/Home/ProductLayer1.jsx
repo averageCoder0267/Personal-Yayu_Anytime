@@ -28,7 +28,7 @@ export default function ProductLayer1() {
                         className="col-lg-1 col-2 d-flex flex-column justify-content-center align-items-center p-0">
                         <img src={PaanCorner.src} alt="Check your internet connection"
                             className="col-12" />
-                        <h6 className="text-primary-emphasis text-center fw-semibold mt-2">Paan &nbsp; Corner</h6>
+                        <h6 className="text-primary-emphasis text-center fw-semibold mt-2">Paan Corner</h6>
                     </div>
                     <div type="button" onClick={() => { router.push(`Product/DairyBread&Eggs`) }}
                         className="col-lg-1 col-2 d-flex flex-column justify-content-center align-items-center p-0">
